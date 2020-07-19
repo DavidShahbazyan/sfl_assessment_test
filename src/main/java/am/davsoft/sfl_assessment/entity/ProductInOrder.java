@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 public class ProductInOrder extends BaseEntity {
     @ManyToOne
     private Product product;
-    private int amount;
+    private Integer amount;
 
     public Product getProduct() {
         return product;
@@ -24,11 +24,11 @@ public class ProductInOrder extends BaseEntity {
         this.product = product;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 }

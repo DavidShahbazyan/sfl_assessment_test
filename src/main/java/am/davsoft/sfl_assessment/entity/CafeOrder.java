@@ -4,7 +4,6 @@ import am.davsoft.sfl_assessment.core.entity.BaseEntity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -16,8 +15,8 @@ import java.util.List;
 public class CafeOrder extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductInOrder> productsList;
-    private double totalAmount;
-    private boolean isOpen;
+    private Double totalAmount;
+    private Boolean isOpen;
 
     public List<ProductInOrder> getProductsList() {
         return productsList;
@@ -27,19 +26,19 @@ public class CafeOrder extends BaseEntity {
         this.productsList = productsList;
     }
 
-    public double getTotalAmount() {
+    public Double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public boolean isOpen() {
+    public Boolean isOpen() {
         return isOpen;
     }
 
-    public void setOpen(boolean open) {
+    public void setOpen(Boolean open) {
         isOpen = open;
     }
 

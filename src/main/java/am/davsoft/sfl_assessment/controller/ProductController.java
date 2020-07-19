@@ -2,7 +2,9 @@ package am.davsoft.sfl_assessment.controller;
 
 import am.davsoft.sfl_assessment.core.controller.BaseController;
 import am.davsoft.sfl_assessment.entity.Product;
+import am.davsoft.sfl_assessment.entity.User;
 import am.davsoft.sfl_assessment.exception.ProductNotFoundException;
+import am.davsoft.sfl_assessment.helper.PermissionEnum;
 import am.davsoft.sfl_assessment.repository.ProductRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,7 @@ public class ProductController extends BaseController {
 
     @PostMapping("")
     public ResponseEntity save(@RequestBody Product product, HttpServletRequest request) {
+        checkUserPermission((User) request.getUserPrincipal(), PermissionEnum.CREATE_PRODUCT);
         Product saved = this.productRepository.save(product);
         return created(
                 ServletUriComponentsBuilder

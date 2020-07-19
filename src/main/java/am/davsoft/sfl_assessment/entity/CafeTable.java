@@ -11,18 +11,18 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class CafeTable extends BaseEntity {
-    private int number;
-    private boolean isBusy;
-    private boolean isReserved;
+    private Integer number;
+    private Boolean isBusy;
+    private Boolean isReserved;
 
     @OneToOne
     private User waiter;
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -30,19 +30,19 @@ public class CafeTable extends BaseEntity {
         return isBusy;
     }
 
-    public void setIsBusy(boolean busy) {
+    public void setIsBusy(Boolean busy) {
         this.isBusy = busy;
     }
 
-    public boolean isReserved() {
+    public Boolean isReserved() {
         return isReserved;
     }
 
-    public void setIsReserved(boolean reserved) {
+    public void setIsReserved(Boolean reserved) {
         this.isReserved = reserved;
     }
 
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return !isBusy && !isReserved;
     }
 

@@ -4,7 +4,6 @@ import am.davsoft.sfl_assessment.core.entity.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import java.time.LocalDate;
 
 /**
  * @author David Shahbazyan
@@ -14,7 +13,8 @@ import java.time.LocalDate;
 public class User extends BaseEntity {
     private String firstName;
     private String lastName;
-    private LocalDate birthDate;
+    private String username;
+    private String password;
 
     @OneToOne
     private UserRole role;
@@ -35,12 +35,20 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public String getUsername() {
+        return username;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public UserRole getRole() {

@@ -6,6 +6,7 @@ import am.davsoft.sfl_assessment.helper.PermissionEnum;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.Objects;
 
 /**
  * @author David Shahbazyan
@@ -15,7 +16,7 @@ import javax.persistence.Enumerated;
 public class Permission extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private PermissionEnum permissionEnum;
-    private boolean enabled;
+    private Boolean enabled;
 
     public static Permission ofType(PermissionEnum permissionEnum) {
         Permission permission = new Permission();
@@ -32,11 +33,25 @@ public class Permission extends BaseEntity {
         this.permissionEnum = permissionEnum;
     }
 
-    public boolean isEnabled() {
+    public Boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Permission that = (Permission) o;
+        return permissionEnum == that.permissionEnum &&
+                Objects.equals(enabled, that.enabled);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(permissionEnum, enabled);
     }
 }

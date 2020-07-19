@@ -16,8 +16,15 @@ public class BaseController {
     @Value("${system.isDeleteAllowed}")
     protected boolean isDeleteAllowed;
 
+    protected void checkUserNotNull(User user) {
+        if (user == null) {
+            throw new YouShallNotPassException();
+        }
+    }
+
     protected void checkUserPermission(User user, PermissionEnum permission) {
-        if (user == null || !user.getRole().hasPermission(permission)) {
+        checkUserNotNull(user);
+        if (!user.getRole().hasPermission(permission)) {
             throw new YouShallNotPassException();
         }
     }
