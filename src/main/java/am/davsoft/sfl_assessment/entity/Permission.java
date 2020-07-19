@@ -1,17 +1,17 @@
 package am.davsoft.sfl_assessment.entity;
 
-import am.davsoft.sfl_assessment.helper.PermissionEnum;
 import am.davsoft.sfl_assessment.core.entity.BaseEntity;
+import am.davsoft.sfl_assessment.helper.PermissionEnum;
 
-import javax.persistence.*;
-import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * @author David Shahbazyan
  * @since Jul 18, 2020
  */
 @Entity
-@Table
 public class Permission extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     private PermissionEnum permissionEnum;

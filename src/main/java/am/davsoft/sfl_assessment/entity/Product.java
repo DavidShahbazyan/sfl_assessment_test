@@ -3,14 +3,12 @@ package am.davsoft.sfl_assessment.entity;
 import am.davsoft.sfl_assessment.core.entity.BaseEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * @author David Shahbazyan
  * @since Jul 18, 2020
  */
 @Entity
-@Table
 public class Product extends BaseEntity {
     private String name;
     private String description;

@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
  * @since Jul 18, 2020
  */
 @Entity
-@javax.persistence.Table
 public class Table extends BaseEntity {
     private int number;
     private boolean busy;

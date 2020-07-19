@@ -4,7 +4,6 @@ import am.davsoft.sfl_assessment.core.entity.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import java.time.LocalDate;
 
 /**
@@ -12,7 +11,6 @@ import java.time.LocalDate;
  * @since Jul 18, 2020
  */
 @Entity
-@Table
 public class User extends BaseEntity {
     private String firstName;
     private String lastName;

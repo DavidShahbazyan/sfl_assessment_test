@@ -4,8 +4,6 @@ import am.davsoft.sfl_assessment.core.entity.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -13,22 +11,25 @@ import java.util.List;
  * @since Jul 18, 2020
  */
 @Entity
-@Table
 public class Order extends BaseEntity {
     @OneToMany
-    private final List<ProductInOrder> productsList = new LinkedList<>();
-    private int totalAmount;
+    private List<ProductInOrder> productsList;
+    private double totalAmount;
     private boolean isOpen;
 
     public List<ProductInOrder> getProductsList() {
         return productsList;
     }
 
-    public int getTotalAmount() {
+    public void setProductsList(List<ProductInOrder> productsList) {
+        this.productsList = productsList;
+    }
+
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -38,5 +39,9 @@ public class Order extends BaseEntity {
 
     public void setOpen(boolean open) {
         isOpen = open;
+    }
+
+    public void calculateTotalAmount() {
+        productsList.forEach(productInOrder -> this.totalAmount = Double.sum(totalAmount, productInOrder.getAmount()));
     }
 }

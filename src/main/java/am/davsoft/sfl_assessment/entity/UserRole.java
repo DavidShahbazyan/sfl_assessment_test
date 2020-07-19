@@ -1,18 +1,14 @@
 package am.davsoft.sfl_assessment.entity;
 
-import am.davsoft.sfl_assessment.helper.PermissionEnum;
 import am.davsoft.sfl_assessment.core.entity.BaseEntity;
 
-import javax.persistence.*;
-import javax.persistence.Table;
-import java.util.Set;
+import javax.persistence.Entity;
 
 /**
  * @author David Shahbazyan
  * @since Jul 18, 2020
  */
 @Entity
-@Table
 public class UserRole extends BaseEntity {
     private String roleName;
 

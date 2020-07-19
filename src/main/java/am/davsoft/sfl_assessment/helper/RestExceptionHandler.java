@@ -3,6 +3,7 @@ package am.davsoft.sfl_assessment.helper;
 import am.davsoft.sfl_assessment.exception.OrderNotFoundException;
 import am.davsoft.sfl_assessment.exception.ProductNotFoundException;
 import am.davsoft.sfl_assessment.exception.TableNotFoundException;
+import am.davsoft.sfl_assessment.exception.UserNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -31,6 +32,12 @@ public class RestExceptionHandler {
     @ExceptionHandler(value = {TableNotFoundException.class})
     public ResponseEntity tableNotFound(TableNotFoundException ex, WebRequest request) {
         writeLog("handling TableNotFoundException...", request, ex);
+        return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(value = {UserNotFoundException.class})
+    public ResponseEntity userNotFound(UserNotFoundException ex, WebRequest request) {
+        writeLog("handling UserNotFoundException...", request, ex);
         return ResponseEntity.notFound().build();
     }
 

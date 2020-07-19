@@ -1,5 +1,6 @@
 package am.davsoft.sfl_assessment.controller;
 
+import am.davsoft.sfl_assessment.core.controller.BaseController;
 import am.davsoft.sfl_assessment.entity.Product;
 import am.davsoft.sfl_assessment.exception.ProductNotFoundException;
 import am.davsoft.sfl_assessment.repository.ProductRepository;
@@ -17,7 +18,7 @@ import static org.springframework.http.ResponseEntity.*;
  */
 @RestController
 @RequestMapping("/v1/products")
-public class ProductController {
+public class ProductController extends BaseController {
     private ProductRepository repository;
 
     public ProductController(ProductRepository repository) {
@@ -58,8 +59,12 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Integer id) {
-        Product existed = this.repository.findById(id).orElseThrow(ProductNotFoundException::new);
-        this.repository.delete(existed);
-        return noContent().build();
+        if (isDeleteAllowed) {
+            Product existed = this.repository.findById(id).orElseThrow(ProductNotFoundException::new);
+            this.repository.delete(existed);
+            return noContent().build();
+        } else {
+            return badRequest().build();
+        }
     }
 }
