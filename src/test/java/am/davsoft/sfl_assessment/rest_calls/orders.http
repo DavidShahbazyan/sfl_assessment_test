@@ -1,0 +1,12 @@
+DELETE http://localhost:8080/v1/orders
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+DELETE http://localhost:8080/v1/orders/5
+Accept: */*
+Cache-Control: no-cache
+
+###
+

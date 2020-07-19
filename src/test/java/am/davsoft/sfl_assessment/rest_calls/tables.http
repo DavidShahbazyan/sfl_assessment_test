@@ -1,0 +1,16 @@
+POST http://localhost:8080/v1/tables
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"number":4, "busy":false, "reserved":false}
+###
+
+PUT http://localhost:8080/v1/tables/123456/changeState
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+"busy"
+###
+

@@ -13,9 +13,16 @@ import javax.persistence.Enumerated;
  */
 @Entity
 public class Permission extends BaseEntity {
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private PermissionEnum permissionEnum;
     private boolean enabled;
+
+    public static Permission ofType(PermissionEnum permissionEnum) {
+        Permission permission = new Permission();
+        permission.setPermissionEnum(permissionEnum);
+        permission.setEnabled(true);
+        return permission;
+    }
 
     public PermissionEnum getPermissionEnum() {
         return permissionEnum;

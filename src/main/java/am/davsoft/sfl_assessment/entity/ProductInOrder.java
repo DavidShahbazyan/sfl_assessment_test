@@ -3,6 +3,7 @@ package am.davsoft.sfl_assessment.entity;
 import am.davsoft.sfl_assessment.core.entity.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -11,7 +12,7 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class ProductInOrder extends BaseEntity {
-    @OneToOne
+    @ManyToOne
     private Product product;
     private int amount;
 

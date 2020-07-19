@@ -1,7 +1,7 @@
 package am.davsoft.sfl_assessment.controller;
 
 import am.davsoft.sfl_assessment.core.controller.BaseController;
-import am.davsoft.sfl_assessment.entity.Order;
+import am.davsoft.sfl_assessment.entity.CafeOrder;
 import am.davsoft.sfl_assessment.entity.ProductInOrder;
 import am.davsoft.sfl_assessment.exception.OrderNotFoundException;
 import am.davsoft.sfl_assessment.exception.ProductNotFoundException;
@@ -36,8 +36,8 @@ public class OrderController extends BaseController {
     }
 
     @PostMapping("")
-    public ResponseEntity save(@RequestBody Order order, HttpServletRequest request) {
-        Order saved = this.orderRepository.save(new Order());
+    public ResponseEntity save(@RequestBody CafeOrder cafeOrder, HttpServletRequest request) {
+        CafeOrder saved = this.orderRepository.save(cafeOrder);
         return created(
                 ServletUriComponentsBuilder
                         .fromContextPath(request)
@@ -54,21 +54,21 @@ public class OrderController extends BaseController {
 
     @PutMapping("/{id}/addProduct")
     public ResponseEntity addProduct(@PathVariable("id") Integer id, @RequestParam Integer productId, @RequestParam Integer amount) {
-        Order order = this.orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
-        if (order.isOpen()) {
+        CafeOrder cafeOrder = this.orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
+        if (cafeOrder.isOpen()) {
             ProductInOrder productInOrder = new ProductInOrder();
             productInOrder.setProduct(this.productRepository.findById(productId).orElseThrow(ProductNotFoundException::new));
             productInOrder.setAmount(amount);
-            order.getProductsList().add(productInOrder);
-            order.calculateTotalAmount();
-            this.orderRepository.save(order);
+            cafeOrder.getProductsList().add(productInOrder);
+            cafeOrder.calculateTotalAmount();
+            this.orderRepository.save(cafeOrder);
         }
         return noContent().build();
     }
 
     @PutMapping("/{id}/close")
     public ResponseEntity close(@PathVariable("id") Integer id) {
-        Order existed = this.orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
+        CafeOrder existed = this.orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
         if (existed.isOpen()) {
             existed.setOpen(false);
             this.orderRepository.save(existed);
@@ -79,7 +79,7 @@ public class OrderController extends BaseController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Integer id) {
         if (isDeleteAllowed) {
-            Order existed = this.orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
+            CafeOrder existed = this.orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
             this.orderRepository.delete(existed);
             return noContent().build();
         } else {

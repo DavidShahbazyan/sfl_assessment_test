@@ -2,7 +2,9 @@ package am.davsoft.sfl_assessment.entity;
 
 import am.davsoft.sfl_assessment.core.entity.BaseEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -11,8 +13,8 @@ import java.util.List;
  * @since Jul 18, 2020
  */
 @Entity
-public class Order extends BaseEntity {
-    @OneToMany
+public class CafeOrder extends BaseEntity {
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductInOrder> productsList;
     private double totalAmount;
     private boolean isOpen;

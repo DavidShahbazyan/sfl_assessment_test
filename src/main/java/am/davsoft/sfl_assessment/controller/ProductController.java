@@ -19,20 +19,20 @@ import static org.springframework.http.ResponseEntity.*;
 @RestController
 @RequestMapping("/v1/products")
 public class ProductController extends BaseController {
-    private ProductRepository repository;
+    private final ProductRepository productRepository;
 
-    public ProductController(ProductRepository repository) {
-        this.repository = repository;
+    public ProductController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @GetMapping("")
     public ResponseEntity loadAll() {
-        return ok(this.repository.findAll());
+        return ok(this.productRepository.findAll());
     }
 
     @PostMapping("")
     public ResponseEntity save(@RequestBody Product product, HttpServletRequest request) {
-        Product saved = this.repository.save(new Product());
+        Product saved = this.productRepository.save(product);
         return created(
                 ServletUriComponentsBuilder
                         .fromContextPath(request)
@@ -44,24 +44,24 @@ public class ProductController extends BaseController {
 
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable("id") Integer id) {
-        return ok(this.repository.findById(id).orElseThrow(ProductNotFoundException::new));
+        return ok(this.productRepository.findById(id).orElseThrow(ProductNotFoundException::new));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Product product) {
-        Product existed = this.repository.findById(id).orElseThrow(ProductNotFoundException::new);
+        Product existed = this.productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
         existed.setName(product.getName());
         existed.setDescription(product.getDescription());
         existed.setPrice(product.getPrice());
-        this.repository.save(existed);
+        this.productRepository.save(existed);
         return noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Integer id) {
         if (isDeleteAllowed) {
-            Product existed = this.repository.findById(id).orElseThrow(ProductNotFoundException::new);
-            this.repository.delete(existed);
+            Product existed = this.productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+            this.productRepository.delete(existed);
             return noContent().build();
         } else {
             return badRequest().build();

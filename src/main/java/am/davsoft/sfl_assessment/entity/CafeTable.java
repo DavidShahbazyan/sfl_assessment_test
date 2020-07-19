@@ -10,12 +10,12 @@ import javax.persistence.OneToOne;
  * @since Jul 18, 2020
  */
 @Entity
-public class Table extends BaseEntity {
+public class CafeTable extends BaseEntity {
     private int number;
-    private boolean busy;
-    private boolean reserved;
+    private boolean isBusy;
+    private boolean isReserved;
 
-    @OneToOne(optional = false)
+    @OneToOne
     private User waiter;
 
     public int getNumber() {
@@ -27,23 +27,23 @@ public class Table extends BaseEntity {
     }
 
     public boolean isBusy() {
-        return busy;
+        return isBusy;
     }
 
-    public void setBusy(boolean busy) {
-        this.busy = busy;
+    public void setIsBusy(boolean busy) {
+        this.isBusy = busy;
     }
 
     public boolean isReserved() {
-        return reserved;
+        return isReserved;
     }
 
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
+    public void setIsReserved(boolean reserved) {
+        this.isReserved = reserved;
     }
 
     public boolean isAvailable() {
-        return !busy && !reserved;
+        return !isBusy && !isReserved;
     }
 
     public User getWaiter() {

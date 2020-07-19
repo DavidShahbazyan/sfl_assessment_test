@@ -1,9 +1,7 @@
 package am.davsoft.sfl_assessment.helper;
 
-import am.davsoft.sfl_assessment.exception.OrderNotFoundException;
-import am.davsoft.sfl_assessment.exception.ProductNotFoundException;
-import am.davsoft.sfl_assessment.exception.TableNotFoundException;
-import am.davsoft.sfl_assessment.exception.UserNotFoundException;
+import am.davsoft.sfl_assessment.exception.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,6 +15,12 @@ import javax.persistence.PersistenceException;
  */
 @RestControllerAdvice
 public class RestExceptionHandler {
+    @ExceptionHandler(value = {YouShallNotPassException.class})
+    public ResponseEntity productNotFound(YouShallNotPassException ex, WebRequest request) {
+        writeLog("!!! YOU SHALL NOT PASS !!!", request, ex);
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body("You have no permissions to do this.");
+    }
+
     @ExceptionHandler(value = {ProductNotFoundException.class})
     public ResponseEntity productNotFound(ProductNotFoundException ex, WebRequest request) {
         writeLog("handling ProductNotFoundException...", request, ex);
